@@ -1,0 +1,73 @@
+<section>
+  <h3 class="text-2xl font-extrabold">
+    Pipes Basicos
+  </h3>
+</section>
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Lower Case</div>
+    <div class="stat-value">{{ nameUpper() | lowercase }}</div>
+    <div class="stat-desc">{{ nameUpper() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Upper Case</div>
+    <div class="stat-value">{{ nameLower() | uppercase }}</div>
+    <div class="stat-desc">{{ nameLower() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Title Case</div>
+    <div class="stat-value">{{ fullName() | titlecase}}</div>
+    <div class="stat-desc">{{ fullName() }}</div>
+  </div>
+</div>
+
+
+<!--  DATES PIPES  -->
+
+<div class="divider">
+</div>
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Date Pipe</div>
+    <div class="stat-value">{{ customDate() | date}}</div>
+    <div class="stat-desc">{{ customDate() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Date Pipe</div>
+    <div class="stat-value">{{ customDate() | date: "short" : "GMT-6"}}</div>
+    <div class="stat-desc">{{ customDate() }}</div>
+  </div>
+</div>
+
+<div class="divider">
+</div>
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full"></div>
+<div class="stat">
+  <div class="stat-title">Date Pipe</div>
+  <div class="stat-value">{{ customDate() | date : "EEEE d, MMMM" : "GMT-4"}}</div>
+  <div class="stat-desc">{{ customDate() }}</div>
+</div>
+
+<div class="stat">
+  <div class="stat-title">Date Pipe</div>
+  <div class="stat-value">{{ customDate() | date : "hh:mm:ss" }}</div>
+  <div class="stat-desc">{{ customDate() }}</div>
+</div>
+
+<div class="divider">
+</div>
+
+<div class="flex flex-row gap-2">
+  <h1 class="text-2xl font-extrabold">
+    Local Actual:
+    <span class="badge badge-secondary">{{ localService.getCurrentLocal }}</span>
+  </h1>
+  <button class="btn btn-outline" (click)="changeLocal('fr')">Change a Francais</button>
+  <button class="btn btn-outline" (click)="changeLocal('en')">Change to English</button>
+  <button class="btn btn-outline" (click)="changeLocal('es')">Cambiar a Español</button>
+</div>

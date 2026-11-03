@@ -1,0 +1,30 @@
+<section>
+  <h3 class="text-2xl font-extrabold">
+    Pipes Númericos
+  </h3>
+</section>
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Number:'1.2-2'</div>
+    <div class="stat-value">{{ totalSell() | number:'1.2-2' }}</div>
+    <div class="stat-desc">{{ totalSell() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Number:'1.2-2'</div>
+    <div class="stat-value">{{ totalSell() + 676776767 | number:'1.0-0' }}</div>
+    <div class="stat-desc">{{ totalSell() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Currency</div>
+    <div class="stat-value">{{ totalSell() | currency : "Q." : "symbol-narrow" : "1.4-4" }}</div>
+    <div class="stat-desc">{{ totalSell() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Percent</div>
+    <div class="stat-value">{{ percent() | percent : "1.2-2" }}</div>
+    <div class="stat-desc">{{ percent() }}</div>
+  </div>
+</div>

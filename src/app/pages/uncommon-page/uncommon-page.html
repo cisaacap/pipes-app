@@ -1,0 +1,80 @@
+<section>
+  <h3 class="text-2xl font-extrabold">
+    Pipes No Tan Comunes
+  </h3>
+</section>
+
+<div class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-3">
+  <pipe-card title="i18nSelect Pipe">
+    <p>Saludos {{ client().name }}, es un placer {{client().gender | i18nSelect: invitationMap }} a nuestro evento.</p>
+    <button class="btn btn-primary mt-4" (click)="changeClient()">Cambiar Cliente</button>
+  </pipe-card>
+
+  <pipe-card title="i18nPlural Pipe">
+    <p>Actualmente {{ clients().length | i18nPlural: clientsMap() }}</p>
+    <button [disabled]="clients().length === 0" class="btn btn-primary mt-4" (click)="deleteClient()">Eliminar Cliente
+    </button>
+  </pipe-card>
+
+  <pipe-card title="Slice Pipe">
+    <b>Original</b>
+    <p>
+      {{ clients().join(', ') }}
+    </p>
+    <b>Slice:0:2</b>
+    <p class="text-primary">
+      {{ clients() | slice:0:2 }}
+    </p>
+    <b>Slice:1:2</b>
+    <p class="text-primary">
+      {{ clients() | slice:1:2 }}
+    </p>
+    <b>Slice:1:4</b>
+    <p class="text-primary">
+      {{ clients() | slice:1:4 }}
+    </p>
+    <b>Slice:0:-2</b>
+    <p class="text-primary">
+      {{ clients() | slice:0:-2 }}
+    </p>
+  </pipe-card>
+
+
+  <pipe-card title="JSON Pipe">
+    <pre>{{ client() | json }}</pre>
+    <pre>{{ clients() | json }}</pre>
+    <pre>{{ client() }}</pre>
+    <pre>{{ clients().join(', ') | json }}</pre>
+  </pipe-card>
+
+
+   <pipe-card title="KeyValue Pipe">
+    <!-- <pre>{{ profile | keyvalue | json}}</pre> El orden importa -->
+     <ul>
+      @for(item of profile | keyvalue; track $index) {
+        <li>
+          <span class="text-primary">
+            <strong>{{ item.key  | titlecase }}:</strong> {{ item.value }}
+          </span>
+        </li>
+      }
+     </ul>
+  </pipe-card>
+
+  <pipe-card title="Async Pipe">
+    @if (promiseValue | async; as value ) {
+      <p class="text-success">
+        {{ value }}
+      </p>
+    } @else {
+      <p class="text-warning">Cargando...</p>
+    }
+
+    <!--  -->
+    <h3 class="mt-4">Observable</h3>
+    <p class="text-primary">
+      {{ myObservable | async }}
+    </p>
+  </pipe-card>
+
+</div>

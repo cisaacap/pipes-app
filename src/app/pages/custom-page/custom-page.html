@@ -1,0 +1,95 @@
+<section>
+  <h3 class="text-2xl font-extrabold">
+    Pipes Númericos
+  </h3>
+</section>
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Toggle Case Pipe</div>
+    <div class="stat-value">{{ name() | toggleCase:upperCase() }}</div>
+    <div class="stat-desc">{{ name() | toggleCase:!upperCase() }}</div>
+
+    <button class="btn btn-primary mt-2" (click)="upperCase.set(!upperCase())">Toggle Case</button>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Bubble Sort Pipe</div>
+    <div class="stat-value">{{ numbers() | bublesort:sortCase() }}</div>
+    <div class="stat-desc">{{ numbers() | bublesort:!sortCase() }}</div>
+
+    <button class="btn btn-primary mt-2" (click)="sortCase.set(!sortCase())">Toggle Sort</button>
+  </div>
+</div>
+
+
+<div class="divider"></div>
+
+
+<section class="my-4">
+  <h1 class="text-2xl font-extrabold">
+    Filtrando por: {{ searchQuery() || 'Todos los héroes' }}
+  </h1>
+  <h1 class="text-2xl font-extrabold">
+    Ordenando por: {{ sortBy() || 'Sin filtros' }}
+  </h1>
+
+  <input
+    type="text"
+    placeholder="Buscar héroe"
+    class="input input-bordered w-full max-w-xs my-4"
+    (input)="searchQuery.set(txtSearch.value)"
+    #txtSearch
+    >
+
+  <div class="flex gap-2 justify-end w-full">
+    <button class="btn btn-primary" (click)="changeSortBy('name')">Por nombre</button>
+    <button class="btn btn-accent" (click)="changeSortBy('canFly')">Por volar</button>
+    <button class="btn btn-secondary" (click)="changeSortBy('color')">Por color</button>
+    <button class="btn btn-info" (click)="changeSortBy('creator')">Por creador</button>
+  </div>
+</section>
+
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="overflow-x-auto w-full">
+    <table class="table table-xs w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Puede volar</th>
+          <th>Color</th>
+          <th>Creador</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (hero of heroes() | filterby : searchQuery() | herosortby : sortBy(); track hero.id; let i = $index) {
+        <tr>
+          <th>{{ i +1 }}</th>
+          <td>{{ hero.name }}</td>
+          <td>
+            <span class="text-xs w-44" [class.txt-success]="hero.canFly" [class.text-error]="!hero.canFly">
+              {{ hero.canFly | canFly}}
+            </span>
+          </td>
+          <td>
+            <span
+              class="text-xs w-44"
+              [style.color]="hero.color | heroTextColor"
+            >
+              {{ hero.color | heroColor | titlecase  }}
+            </span>
+          </td>
+          <td>
+            <span [class.txt-primary]="hero.creator === 0"
+            [class.txt-secondary]="hero.creator === 1"
+            class="text-xs w-44">
+              {{ hero.creator | herocreator }}
+            </span>
+          </td>
+        </tr>}
+      </tbody>
+    </table>
+  </div>
+</div>
